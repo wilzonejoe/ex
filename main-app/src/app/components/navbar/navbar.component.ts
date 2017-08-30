@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	moduleId: module.id,
@@ -6,10 +6,10 @@ import {Component} from '@angular/core';
 	templateUrl: 'navbar.component.html'
 })
 
-export class NavbarComponent{
-	private projectName:string;
+export class NavbarComponent {
+	private projectName: string;
 
-	constructor(){
+	constructor() {
 		this.projectName = 'A2Website';
 	}
 }
