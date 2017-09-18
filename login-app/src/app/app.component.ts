@@ -11,10 +11,11 @@ export class AppComponent {
   title = 'app';
   username = '';
   password = '';
-  url = 'https://fbr50l67ie.execute-api.us-east-1.amazonaws.com/jwBooking'
+  url = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod';
+  headers = new Headers();
   constructor(private http: Http) { }
 
-  login(): Promise<boolean> {
+  login(username: string, password: string): Promise<boolean> {
     return this.http.post(this.url, null)
       .toPromise()
       .then(response => response.json().data)
