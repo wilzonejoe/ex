@@ -14,7 +14,7 @@ export class AppComponent {
   username: String;
   onLoginButtonClicked(): void  {
     console.log(this.username, this.password);
-    this.loginService.login()
+    this.loginService.login(this.username, this.password)
     .then((response) => {
       // move to next page
       return response;
