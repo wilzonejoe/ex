@@ -15,11 +15,11 @@ export class AppComponent {
   onLoginButtonClicked(): void  {
     console.log(this.username, this.password);
     this.loginService.login(this.username, this.password)
-    .then((response) => {
-      // move to next page
-      return response;
-    }).catch((ex) => {
-      console.error('Error Logging in users', ex);
-    });
+    // .then((response) => {
+    //   // move to next page
+    //   return response;
+    // }).catch((ex) => {
+    //   console.error('Error Logging in users', ex);
+    // });
   }
 }

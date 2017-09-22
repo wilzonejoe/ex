@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @NgModule({
@@ -11,15 +11,15 @@ export class LoginService {
     login(username: String, password: String): Promise<boolean> {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        headers.append('Access-Control-Allow-Origin', 'http://aws-app-bucket-2.s3-website-us-east-1.amazonaws.com');
+        const options = new RequestOptions({ headers: headers });        
         const content = JSON.stringify({
           USERNAME: username,
           PASSWORD: password
         });
 
-        return this.http.post(this.url, content)
+        return this.http.post(this.url, content, options)
           .toPromise()
-          .then(response => response.json().data)
+          .then(response => console.log(response.json()))
           .catch(this.handleError);
       }
       private handleError(error: any): Promise<any> {
