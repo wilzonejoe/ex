@@ -14,12 +14,15 @@ export class AppComponent {
   username: String;
   onLoginButtonClicked(): void  {
     console.log(this.username, this.password);
-    this.loginService.login(this.username, this.password)
-    // .then((response) => {
-    //   // move to next page
-    //   return response;
-    // }).catch((ex) => {
-    //   console.error('Error Logging in users', ex);
-    // });
+    this.loginService.login(this.username, this.password, 
+      function (response) {
+        console.log('Success', response);
+        // Storing current installed user details      
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        window.location.href = "https://google.com";
+     }, function (response) {
+      console.log('Fail', response);
+      // Username or Password is wrong.   
+    });
   }
 }
