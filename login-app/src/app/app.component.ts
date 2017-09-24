@@ -10,10 +10,22 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
   constructor(private loginService: LoginService) {}
+  
+  // Login var
   password: String;
   username: String;
+
+  // Signin var
+  sPassword: String;
+  sConfPassword: String;
+  sUsername: String;
+  sEmail: String;
+  sConfEmail: String;
+
+  lol: String = 'asdsadasd';
+  
   onLoginButtonClicked(): void  {
-    console.log(this.username, this.password);
+    console.log('Login', this.username, this.password);
     this.loginService.login(this.username, this.password, 
       function (response) {
         console.log('Success', response);
@@ -24,5 +36,10 @@ export class AppComponent {
       console.log('Fail', response);
       // Username or Password is wrong.   
     });
+  }
+
+  onSignUpButtonClicked(): void {
+    console.log('Sign Up', this.sUsername, this.sPassword, this.sConfPassword, 
+      this.sEmail, this.sConfEmail);
   }
 }

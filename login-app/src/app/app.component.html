@@ -1,14 +1,48 @@
 <div style="text-align:center">
-  <h1>
-    Login Screen
-  </h1>
-  <form>
-    username:<br>
-    <input type="text" name="username" [(ngModel)]="username"><br>
-    password:<br>
-    <input type="password" name="password" [(ngModel)]="password">
-  </form>
-  <button (click)="onLoginButtonClicked()">Login</button>
+  <!-- Login component -->  
+  <div>
+    <h1>
+      Login
+    </h1>
+    <form>
+      Username:<br>
+      <input type="text" name="username" [(ngModel)]="username"><br>
+      Password:<br>
+      <input type="password" name="password" [(ngModel)]="password">
+    </form>
+    <button (click)="onLoginButtonClicked()">Login</button>
+  </div>
+  <!-- End of Login component -->  
+  
+  <!-- Sign up component -->
+  <div>
+    <h1>
+        Sign Up
+      </h1>
+      <form>
+        Username:
+        <input type="text" name="username" [(ngModel)]="sUsername"><br>
+          <div class="form-group">
+              <label for="mailAddress" class="req">Email:</label>
+              <input type="text" ngControl="mailAddress" [(ngModel)]="sEmail"/>
+              <div *ngIf="mailAddress.dirty && !mailAddress.valid" class="alert alert-danger">
+                  <p *ngIf="mailAddress.errors.required">mailAddressis required.</p>
+                  <p *ngIf="mailAddress.errors.incorrectMailFormat">Email format is invalid.</p>
+              </div>
+          </div>
+          Password:
+          <input type="password" name="password" [(ngModel)]="sPassword"><br>
+          Confirm Password:
+          <input type="password" name="password" [(ngModel)]="sConfPassword"><br>
+      </form>
+      <button (click)="onSignUpButtonClicked()">Sign Up</button>
+  </div>
+  <!-- End of Sign up component -->
+  
+  <!-- Confirm Signup component -->
+  <h1> Confirm Sign in {{this.lol}} </h1>
+  <!-- End of Confirm Signup component -->
+  
   
 </div>
 
