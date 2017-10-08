@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-// import { ActivatedRoute } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import { LoginService } from './services/login.service';
 
@@ -11,6 +11,8 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent implements OnInit {
   loginService: LoginService;
+  router: Router;
+
   // Login States
   isLoginState: Boolean;
   isSignUpState: Boolean;
@@ -29,47 +31,41 @@ export class AppComponent implements OnInit {
 
   // Comfirm var
   confirmCode: String;
+  confirmUsername: String;
 
-  constructor(loginService : LoginService) {
+  constructor(loginService: LoginService, router: Router) {
     this.loginService = loginService;
+    this.router = router;
   }
 
   ngOnInit() {
     this.isLoginState = true; // Start on login screen
-    this.onInitStatePage();
+    // this.isConfirmState = true; // debugger
+    // this.isSignUpState = true; // debugger
   }
 
   /***************************
    * Page transition functions
    ***************************/
 
-  onInitStatePage(): void {
-    // Get param in the address bar
-    console.log('Start', this.isLoginState);
-  }
-
   onSwitchToSignup(): void {
     this.isLoginState = false; 
     this.isSignUpState = true;
     this.isConfirmState = false;
-    // Change the address in the bar
-    // Change the page state var
   }
 
   onSwitchToConfirm(): void {
     this.isLoginState = false; 
     this.isSignUpState = false;
     this.isConfirmState = true;
-    // Change the address in the bar
-    // Change the page state var
+    //  Add to the username to url
+    this.router.navigate(['/'],{ queryParams: { username : this.sUsername } });
   }
 
   onSwitchToLogin(): void {
     this.isLoginState = true; 
     this.isSignUpState = false;
     this.isConfirmState = false;
-    // Change the address in the bar
-    // Change the page state var
   }
 
     /*****************************************
@@ -84,6 +80,7 @@ export class AppComponent implements OnInit {
         // Storing current installed user details
         localStorage.setItem('currentUser', JSON.stringify(response));
         // window.location.href = "https://google.com"; // To application root
+        alert('Successfully logged in, '+ this.username);
      }, function (response) {
       console.log('Fail', response);
       // Username or Password is wrong.
@@ -94,11 +91,8 @@ export class AppComponent implements OnInit {
     console.log('Sign Up', this.sUsername, this.sPassword, this.sConfPassword,
       this.sEmail, this.sConfEmail);
       this.loginService.register(this.sUsername, this.sPassword, this.sEmail,
-        // function (response) {
-          // console.log('Success', response);
-          // Move to confirm page
-          this.onSwitchToConfirm.bind(this),
-      //  },
+        // Move to confirm page
+        this.onSwitchToConfirm.bind(this),
         function (response) {
         console.log('Fail', response);
         // Something was wrong with either the request body or the service
@@ -106,13 +100,18 @@ export class AppComponent implements OnInit {
   }
 
   onSignUpConfirmButtonClicked(): void {
-    console.log('Sign Up Comfirm', this.confirmCode, this.sUsername,
-    this.sPassword, this.sConfPassword, this.sEmail, this.sConfEmail);
-    this.loginService.confirm(this.sUsername, this.confirmCode,
+    // Get username from url link from email
+    console.log(window.location);
+    // e.g. http://localhost:4200/?username=albert
+    this.confirmUsername = this.router.parseUrl(this.router.url).queryParams["username"];
+    console.log('Sign Up Comfirm', this.confirmCode, this.confirmUsername);
+    this.loginService.confirm(this.confirmUsername, this.confirmCode,
       function (response) {
         console.log('Success Confirmation', response);
-        // If success shwo banner of success
+        // Add user name to the url
 
+        // If success show banner of success
+        alert('Successfully confirmed account, please login');
         // Click banner to go to login page
      }, function (response) {
       console.log('Fail Confirmation', response);

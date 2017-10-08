@@ -42,8 +42,9 @@
     
   <!-- Confirm Signup component -->
   <div [hidden]="!isConfirmState">
-    <h1> Confirm Sign in {{this.lol}} </h1>
-    <button (click)="onSignUpConfirmButtonClicked()">Verify</button> <button (click)="onSwitchToSignup()">Back</button>
+    <h1>Activate your account</h1>
+    <input type="text" name="confirmCode" [(ngModel)]="confirmCode" [ngModelOptions]="{standalone: true}"><br>
+    <button (click)="onSignUpConfirmButtonClicked()">Activate</button>
   </div>
   <!-- End of Confirm Signup component -->
   

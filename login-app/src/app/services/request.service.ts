@@ -22,14 +22,28 @@ export class RequestService {
     }
 
     /**
+     * @function makeRequest
+     * @param body
+     * @param successCB
+     * @param failCB
+     * @return {Promise}
+     */
+    public makePostRequest(body, successCB, failCB, url): Promise<boolean> {
+        return this.http.post(url, body, this._getDefaultOptions())
+            .toPromise()
+            .then(response => successCB(response.json()))
+            .catch(error => failCB(error));
+    }
+
+    /**
      * @function _makeRequest
      * @param body
      * @param successCB
      * @param failCB
      * @return {Promise}
      */
-    public makeRequest(body, successCB, failCB, url): Promise<boolean> {
-        return this.http.post(url, body, this._getDefaultOptions())
+    public makePutRequest(body, successCB, failCB, url): Promise<boolean> {
+        return this.http.put(url, body, this._getDefaultOptions())
             .toPromise()
             .then(response => successCB(response.json()))
             .catch(error => failCB(error));

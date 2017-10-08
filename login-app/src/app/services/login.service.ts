@@ -10,7 +10,6 @@ import { RequestService } from './request.service';
 export class LoginService {
     loginUrl = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod/LOGIN';
     registerUrl = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod/SIGNUP';
-    // confirmUrl = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod/LOGIN';
     
     constructor(private requestService: RequestService) { }
 
@@ -21,8 +20,8 @@ export class LoginService {
         PASSWORD: password,
         EMAIL: email
       });
-      // Make request
-      return this.requestService.makeRequest(content, successCB, failCB, this.registerUrl);
+      // Make post request
+      return this.requestService.makePostRequest(content, successCB, failCB, this.registerUrl);
     }
 
     confirm(username: String, code: String, successCB, failCB): Promise<boolean>{
@@ -31,8 +30,8 @@ export class LoginService {
         USERNAME: username,
         CODE: code
       });
-      // Make request
-      return this.requestService.makeRequest(content, successCB, failCB, this.registerUrl);
+      // Make put request
+      return this.requestService.makePutRequest(content, successCB, failCB, this.registerUrl);
     }
 
     login(username: String, password: String, successCB: Function, failCB: Function): Promise<boolean> {
@@ -41,7 +40,7 @@ export class LoginService {
           USERNAME: username,
           PASSWORD: password
         });
-        // Make request
-        return this.requestService.makeRequest(content, successCB, failCB, this.loginUrl);
+        // Make post request        
+        return this.requestService.makePostRequest(content, successCB, failCB, this.loginUrl);
       }
 }
