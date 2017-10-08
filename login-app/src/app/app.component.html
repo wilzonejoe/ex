@@ -25,6 +25,7 @@
           <div class="form-group">
               <label for="mailAddress" class="req">Email:</label>
               <input type="text" ngControl="mailAddress" [(ngModel)]="sEmail" [ngModelOptions]="{standalone: true}"/>
+              <input type="text" ngControl="mailAddress" [(ngModel)]="sConfEmail" [ngModelOptions]="{standalone: true}"/>              
               <!-- <div *ngIf="mailAddress.dirty && !mailAddress.valid" class="alert alert-danger">
                   <p *ngIf="mailAddress.errors.required">mailAddressis required.</p>
                   <p *ngIf="mailAddress.errors.incorrectMailFormat">Email format is invalid.</p>
@@ -38,7 +39,7 @@
       <button (click)="onSignUpButtonClicked()">Sign Up</button> <button (click)="onSwitchToLogin()">Back</button>
   </div>
   <!-- End of Sign up component -->
-  
+    
   <!-- Confirm Signup component -->
   <div [hidden]="!isConfirmState">
     <h1> Confirm Sign in {{this.lol}} </h1>

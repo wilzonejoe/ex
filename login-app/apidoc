@@ -1,0 +1,23 @@
+signup
+
+{
+    "USERNAME": "username2",
+    "PASSWORD":"P@ssw0rd",
+    "EMAIL":"wilzonejoe+2@gmail.com"
+}
+
+
+{u'UserConfirmed': False, u'UserSub': u'695f5f6b-a7c9-4e98-8cc7-a98f977ca94b', u'CodeDeliveryDetails': {u'AttributeName': u'email', u'Destination': u'w***@g***.com', u'DeliveryMedium': u'EMAIL'}, 'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'RequestId': 'cd610365-8e7e-11e7-b99b-71f33875d5b6', 'HTTPHeaders': {'date': 'Thu, 31 Aug 2017 19:01:32 GMT', 'x-amzn-requestid': 'cd610365-8e7e-11e7-b99b-71f33875d5b6', 'content-length': '175', 'content-type': 'application/x-amz-json-1.1', 'connection': 'keep-alive'}}}
+
+confirm
+
+{
+    "USERNAME": "username2",
+    "CODE":"693569" //get it from ur email pls
+}
+
+sign in (not finished ye)
+{
+    "USERNAME": "username2",
+    "PASSWORD":"P@ssw0rd"
+}

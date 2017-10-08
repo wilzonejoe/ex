@@ -30,39 +30,13 @@ export class AppComponent implements OnInit {
   // Comfirm var
   confirmCode: String;
 
-  constructor() {}
+  constructor(loginService : LoginService) {
+    this.loginService = loginService;
+  }
 
   ngOnInit() {
     this.isLoginState = true; // Start on login screen
     this.onInitStatePage();
-  }
-
-  /*****************************************
-   * Login / Signin / Confirm Action buttons
-   *****************************************/
-
-  onLoginButtonClicked(): void  {
-    console.log('Login', this.username, this.password);
-    this.loginService.login(this.username, this.password,
-      function (response) {
-        console.log('Success', response);
-        // Storing current installed user details
-        localStorage.setItem('currentUser', JSON.stringify(response));
-        // window.location.href = "https://google.com"; // To application root
-     }, function (response) {
-      console.log('Fail', response);
-      // Username or Password is wrong.
-    });
-  }
-
-  onSignUpButtonClicked(): void {
-    console.log('Sign Up', this.sUsername, this.sPassword, this.sConfPassword,
-      this.sEmail, this.sConfEmail);
-  }
-
-  onSignUpConfirmButtonClicked(): void {
-    console.log('Sign Up Comfirm', this.confirmCode, this.sUsername,
-    this.sPassword, this.sConfPassword, this.sEmail, this.sConfEmail);
   }
 
   /***************************
@@ -96,5 +70,53 @@ export class AppComponent implements OnInit {
     this.isConfirmState = false;
     // Change the address in the bar
     // Change the page state var
+  }
+
+    /*****************************************
+   * Login / Signin / Confirm Action buttons
+   *****************************************/
+
+  onLoginButtonClicked(): void  {
+    console.log('Login', this.username, this.password);
+    this.loginService.login(this.username, this.password,
+      function (response) {
+        console.log('Success', response);
+        // Storing current installed user details
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        // window.location.href = "https://google.com"; // To application root
+     }, function (response) {
+      console.log('Fail', response);
+      // Username or Password is wrong.
+    });
+  }
+
+  onSignUpButtonClicked(): void {
+    console.log('Sign Up', this.sUsername, this.sPassword, this.sConfPassword,
+      this.sEmail, this.sConfEmail);
+      this.loginService.register(this.sUsername, this.sPassword, this.sEmail,
+        // function (response) {
+          // console.log('Success', response);
+          // Move to confirm page
+          this.onSwitchToConfirm.bind(this),
+      //  },
+        function (response) {
+        console.log('Fail', response);
+        // Something was wrong with either the request body or the service
+      });
+  }
+
+  onSignUpConfirmButtonClicked(): void {
+    console.log('Sign Up Comfirm', this.confirmCode, this.sUsername,
+    this.sPassword, this.sConfPassword, this.sEmail, this.sConfEmail);
+    this.loginService.confirm(this.sUsername, this.confirmCode,
+      function (response) {
+        console.log('Success Confirmation', response);
+        // If success shwo banner of success
+
+        // Click banner to go to login page
+     }, function (response) {
+      console.log('Fail Confirmation', response);
+      // Something was wrong with either the request body or the service
+    });
   }
 }

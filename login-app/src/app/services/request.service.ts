@@ -7,7 +7,6 @@ import 'rxjs/add/operator/toPromise';
 })
 export class RequestService {
     // Field var
-    url = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod/LOGIN';
     constructor(private http: Http) { }
 
     /**
@@ -29,8 +28,8 @@ export class RequestService {
      * @param failCB
      * @return {Promise}
      */
-    public makeRequest(body, successCB, failCB): Promise<boolean> {
-        return this.http.post(this.url, body, this._getDefaultOptions())
+    public makeRequest(body, successCB, failCB, url): Promise<boolean> {
+        return this.http.post(url, body, this._getDefaultOptions())
             .toPromise()
             .then(response => successCB(response.json()))
             .catch(error => failCB(error));
