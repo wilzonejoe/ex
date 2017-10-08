@@ -11,28 +11,29 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent implements OnInit {
   loginService: LoginService;
-    // Login States
-    loginState: String;
-    LOGIN_STATES: object;
+  // Login States
+  isLoginState: Boolean;
+  isSignUpState: Boolean;
+  isConfirmState: Boolean;
 
-    // Login var
-    password: String;
-    username: String;
+  // Login var
+  password: String;
+  username: String;
 
-    // Signin var
-    sPassword: String;
-    sConfPassword: String;
-    sUsername: String;
-    sEmail: String;
-    sConfEmail: String;
+  // Signin var
+  sPassword: String;
+  sConfPassword: String;
+  sUsername: String;
+  sEmail: String;
+  sConfEmail: String;
 
-    // Comfirm var
-    confirmCode: String;
+  // Comfirm var
+  confirmCode: String;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
+    this.isLoginState = true; // Start on login screen
     this.onInitStatePage();
   }
 
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit {
         console.log('Success', response);
         // Storing current installed user details
         localStorage.setItem('currentUser', JSON.stringify(response));
-        // window.location.href = "https://google.com";
+        // window.location.href = "https://google.com"; // To application root
      }, function (response) {
       console.log('Fail', response);
       // Username or Password is wrong.
@@ -70,20 +71,29 @@ export class AppComponent implements OnInit {
 
   onInitStatePage(): void {
     // Get param in the address bar
-    console.log('asdasdasd');
+    console.log('Start', this.isLoginState);
   }
 
   onSwitchToSignup(): void {
+    this.isLoginState = false; 
+    this.isSignUpState = true;
+    this.isConfirmState = false;
     // Change the address in the bar
     // Change the page state var
   }
 
   onSwitchToConfirm(): void {
+    this.isLoginState = false; 
+    this.isSignUpState = false;
+    this.isConfirmState = true;
     // Change the address in the bar
     // Change the page state var
   }
 
   onSwitchToLogin(): void {
+    this.isLoginState = true; 
+    this.isSignUpState = false;
+    this.isConfirmState = false;
     // Change the address in the bar
     // Change the page state var
   }
