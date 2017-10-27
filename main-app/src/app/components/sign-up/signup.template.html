@@ -1,0 +1,22 @@
+<div style="text-align:center">
+    <h1>
+      Login Screen
+    </h1>
+    <form>
+      username:<br>
+      <input type="text" name="username" [(ngModel)]="username"><br>
+      password:<br>
+      <input type="password" name="password" [(ngModel)]="password">
+        <div class="form-group">
+            <label for="mailAddress" class="req">Email</label>
+            <input type="text" ngControl="mailAddress" />
+            <div *ngIf="mailAddress.dirty && !mailAddress.valid" class="alert alert-danger">
+                <p *ngIf="mailAddress.errors.required">mailAddressis required.</p>
+                <p *ngIf="mailAddress.errors.incorrectMailFormat">Email format is invalid.</p>
+            </div>
+        </div>
+    </form>
+    <button (click)="onLoginButtonClicked()">Login</button>
+    
+  </div>
+  
