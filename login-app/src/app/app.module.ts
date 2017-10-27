@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { HttpModule, JsonpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { routing } from './app.route';
+
 
 import { AppComponent } from './app.component';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -12,7 +16,11 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    JsonpModule,
+    FormsModule,
+    RouterModule,
+    routing, // Coupled with the router
+    LoginService
   ],
   providers: [],
   bootstrap: [AppComponent]
