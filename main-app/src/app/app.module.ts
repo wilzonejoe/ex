@@ -12,6 +12,8 @@ import {SignupComponent} from './components/sign-up/signup.component';
 
 import {ContentModule} from './content-view';
 
+// Providers
+import { ListModule } from './list-module';
 
 import { RoutesConfiguration } from './app.routes';
 
@@ -27,7 +29,8 @@ import { RoutesConfiguration } from './app.routes';
   imports: [
     BrowserModule,
     MaterializeModule,
-    RoutesConfiguration
+    RoutesConfiguration,
+    ListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

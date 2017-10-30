@@ -1,25 +1,13 @@
-import { Component } from '@angular/core';
 import * as _ from 'lodash';
-
-// Base class attibute class
-export class Attribute {
-    key: String;
-    value; // Can be anything
-    onClickCB: Function;
-    idSelector: String;
-    constructor(key: String, value, onClickCB: Function, idSelector: String) {
-        this.key = key;
-        this.value = value;
-        this.onClickCB = onClickCB;
-        this.idSelector = idSelector;
-    }
-}
+import { ListAttribute } from './list-attribute.model';
+import { Injectable, Inject } from '@angular/core';
 
 // List object
+@Injectable()
 export class ListObject {
-    attributes: Array<Attribute>;
+    attributes: Array<ListAttribute>;
     onClickCB: Function;
-    constructor(attributes: Array<Attribute>, onClickCB: Function) {
+    constructor(@Inject(ListAttribute) attributes: Array<ListAttribute>, onClickCB: Function) {
         this.attributes = attributes;
         this.onClickCB = onClickCB;
     }
@@ -30,7 +18,7 @@ export class ListObject {
      */
     addListItem(key: String, value, cb: Function, idSelector: String): void {
         // Construct attr object and push it into the array
-        const attribute = new Attribute(key, value, cb, idSelector);
+        const attribute = new ListAttribute(key, value, cb, idSelector);
         this.attributes.push(attribute);
     }
     removeListItem(key, value): void {
@@ -39,7 +27,7 @@ export class ListObject {
             return item[key] === value;
         });
     }
-    updateListItem(iKey, iValue, newAttrObj: Attribute): void {
+    updateListItem(iKey, iValue, newAttrObj: ListAttribute): void {
         // Update
         const attrIndexObj = {};
         attrIndexObj[iKey] = iValue;
@@ -47,7 +35,7 @@ export class ListObject {
         // Replace item at index using native splice
         this.attributes.splice(index, 1, newAttrObj);
     }
-    getListItem(iKey, iValue): Array<Attribute> {
+    getListItem(iKey, iValue): Array<ListAttribute> {
         // Get attr object by key and value
         const returnItems = [];
         _.forEach(this.attributes, element => {
@@ -57,25 +45,8 @@ export class ListObject {
         });
         return returnItems;
     }
-    getListItems(): Array<Attribute> {
+    getListItems(): Array<ListAttribute> {
         // Get all
         return this.attributes;
     }
 }
-
-// List component
-@Component({
-    selector: 'app-list-mod',
-    templateUrl: './list.component.html',
-    styleUrls: ['./list.component.css']
-})
-export class ListComponent {
-    // Create a general object
-    listObject: Object;
-    constructor(listObject: ListObject) {
-        this.listObject = listObject;
-    }
-}
-
-
-
