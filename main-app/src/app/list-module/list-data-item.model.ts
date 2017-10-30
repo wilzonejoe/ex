@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 // Base class attibute class
 @Injectable()
-export class ListAttribute {
+export class ListDataItem {
     key: String;
     value; // Can be anything
     onClickCB: Function;

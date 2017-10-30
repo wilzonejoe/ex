@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { ListObject } from './list.model';
+import { ListModel } from './list.model';
 
 // List component
 @Component({
@@ -9,11 +9,15 @@ import { ListObject } from './list.model';
 })
 export class ListComponent {
     // Create a general object
-    listObject: Object;
+    list: ListModel;
     constructor() {}
 
-    init(@Inject(ListObject) listObject: ListObject) {
-        this.listObject = listObject;
+    init(list: ListModel) {
+        this.list = list;
+    }
+
+    getList(): ListModel {
+        return this.list;
     }
 }
 

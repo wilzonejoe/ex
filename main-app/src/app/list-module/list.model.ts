@@ -1,15 +1,17 @@
 import * as _ from 'lodash';
-import { ListAttribute } from './list-attribute.model';
+import { ListDataItem } from './list-data-item.model';
 import { Injectable, Inject } from '@angular/core';
 
 // List object
 @Injectable()
-export class ListObject {
-    attributes: Array<ListAttribute>;
+export class ListModel {
+    attributes: Array<ListDataItem>;
     onClickCB: Function;
-    constructor(@Inject(ListAttribute) attributes: Array<ListAttribute>, onClickCB: Function) {
+    data;
+    constructor(@Inject(ListDataItem) attributes: Array<ListDataItem>, onClickCB: Function, data) {
         this.attributes = attributes;
         this.onClickCB = onClickCB;
+        this.data = data;
     }
 
     /* Attribute Functions */
@@ -18,7 +20,7 @@ export class ListObject {
      */
     addListItem(key: String, value, cb: Function, idSelector: String): void {
         // Construct attr object and push it into the array
-        const attribute = new ListAttribute(key, value, cb, idSelector);
+        const attribute = new ListDataItem(key, value, cb, idSelector);
         this.attributes.push(attribute);
     }
     removeListItem(key, value): void {
@@ -27,7 +29,7 @@ export class ListObject {
             return item[key] === value;
         });
     }
-    updateListItem(iKey, iValue, newAttrObj: ListAttribute): void {
+    updateListItem(iKey, iValue, newAttrObj: ListDataItem): void {
         // Update
         const attrIndexObj = {};
         attrIndexObj[iKey] = iValue;
@@ -35,7 +37,7 @@ export class ListObject {
         // Replace item at index using native splice
         this.attributes.splice(index, 1, newAttrObj);
     }
-    getListItem(iKey, iValue): Array<ListAttribute> {
+    getListItem(iKey, iValue): Array<ListDataItem> {
         // Get attr object by key and value
         const returnItems = [];
         _.forEach(this.attributes, element => {
@@ -45,7 +47,7 @@ export class ListObject {
         });
         return returnItems;
     }
-    getListItems(): Array<ListAttribute> {
+    getListItems(): Array<ListDataItem> {
         // Get all
         return this.attributes;
     }

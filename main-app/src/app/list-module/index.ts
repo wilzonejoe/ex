@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ListObject } from './list.model';
-import { ListAttribute } from './list-attribute.model';
+import { ListModel } from './list.model';
+import { ListDataItem } from './list-data-item.model';
 import { ListComponent } from './list.component';
 
 
@@ -15,7 +15,7 @@ import { ListComponent } from './list.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [ListObject, ListAttribute],
+  providers: [ListModel, ListDataItem],
   bootstrap: [ListComponent]
 })
 export class ListModule { }

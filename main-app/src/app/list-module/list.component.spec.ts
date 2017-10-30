@@ -1,7 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
-import { ListObject } from './list.model';
+import { ListModel } from './list.model';
+import { ListDataItem } from './list-data-item.model';
+
+// Shared fixture variables in tests
+let fixture;
+let app;
+
+let listData;
 
 describe('ListComponent', () => {
   beforeEach(async(() => {
@@ -10,11 +17,21 @@ describe('ListComponent', () => {
         ListComponent
       ],
     }).compileComponents();
+    // Setup test fixtures
+    fixture = TestBed.createComponent(ListComponent);
+    app = fixture.debugElement.componentInstance;
+    // Test data structures
+    const attribute1 = new ListDataItem('attr1', 1, null, '1');
+    listData = new ListModel([attribute1], null, {data : 1});
   }));
 
   it('should create the list', async(() => {
-    const fixture = TestBed.createComponent(ListComponent);
-    const app = fixture.debugElement.componentInstance;
+    expect(fixture).toBeTruthy();
     expect(app).toBeTruthy();
+  }));
+
+  it('should be able to store a list object', async(() => {
+    app.init(listData);
+    expect(app.getList()).toEqual(listData);
   }));
 });
