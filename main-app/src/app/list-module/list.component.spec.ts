@@ -1,4 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { ListComponent } from './list.component';
 import { ListModel } from './list.model';
@@ -32,6 +33,14 @@ describe('ListComponent', () => {
 
   it('should be able to store a list object', async(() => {
     app.init(listData);
-    expect(app.getList()).toEqual(listData);
+    expect(app.getList()).toBeTruthy();
+  }));
+
+  it('should be able display list object', async(() => {
+    app.init(listData);
+    // Display logic
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.innerHTML).toContain('attr1');
   }));
 });

@@ -5,11 +5,11 @@ import { Injectable, Inject } from '@angular/core';
 // List object
 @Injectable()
 export class ListModel {
-    attributes: Array<ListDataItem>;
+    listDataItem: Array<ListDataItem>;
     onClickCB: Function;
     data;
-    constructor(@Inject(ListDataItem) attributes: Array<ListDataItem>, onClickCB: Function, data) {
-        this.attributes = attributes;
+    constructor(@Inject(ListDataItem) listDataItem: Array<ListDataItem>, onClickCB: Function, data) {
+        this.listDataItem = listDataItem;
         this.onClickCB = onClickCB;
         this.data = data;
     }
@@ -21,11 +21,11 @@ export class ListModel {
     addListItem(key: String, value, cb: Function, idSelector: String): void {
         // Construct attr object and push it into the array
         const attribute = new ListDataItem(key, value, cb, idSelector);
-        this.attributes.push(attribute);
+        this.listDataItem.push(attribute);
     }
     removeListItem(key, value): void {
         // Remove according to the list
-        _.remove(this.attributes, (item) => {
+        _.remove(this.listDataItem, (item) => {
             return item[key] === value;
         });
     }
@@ -33,14 +33,14 @@ export class ListModel {
         // Update
         const attrIndexObj = {};
         attrIndexObj[iKey] = iValue;
-        const index = _.findIndex(this.attributes, attrIndexObj);
+        const index = _.findIndex(this.listDataItem, attrIndexObj);
         // Replace item at index using native splice
-        this.attributes.splice(index, 1, newAttrObj);
+        this.listDataItem.splice(index, 1, newAttrObj);
     }
     getListItem(iKey, iValue): Array<ListDataItem> {
         // Get attr object by key and value
         const returnItems = [];
-        _.forEach(this.attributes, element => {
+        _.forEach(this.listDataItem, element => {
             if (element) {
                 returnItems.push(element);
             }
@@ -49,6 +49,6 @@ export class ListModel {
     }
     getListItems(): Array<ListDataItem> {
         // Get all
-        return this.attributes;
+        return this.listDataItem;
     }
 }

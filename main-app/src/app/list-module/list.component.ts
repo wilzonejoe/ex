@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { ListModel } from './list.model';
+import { ListDataItem } from './list-data-item.model';
 
 // List component
 @Component({
@@ -16,8 +17,8 @@ export class ListComponent {
         this.list = list;
     }
 
-    getList(): ListModel {
-        return this.list;
+    getList(): Array<ListDataItem> {
+        return this.list.getListItems();
     }
 }
 

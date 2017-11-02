@@ -1,6 +1,6 @@
 <div>
-    <div *ngFor="let attr of listObject.attributes">
+    <div *ngFor="let item of getList()">
         List Component
-        {{attr}}
+        <p>{{item.key}}<p>
     </div>
 </div>
