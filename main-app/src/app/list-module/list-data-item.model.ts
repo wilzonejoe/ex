@@ -4,12 +4,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ListDataItem {
     key: String;
-    value; // Can be anything
+    data; // Can be anything
     onClickCB: Function;
     idSelector: String;
-    constructor(key: String, value, onClickCB: Function, idSelector: String) {
+    constructor(key: String, data, onClickCB: Function, idSelector: String) {
         this.key = key;
-        this.value = value;
+        this.data = data;
         this.onClickCB = onClickCB;
         this.idSelector = idSelector;
     }
