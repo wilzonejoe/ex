@@ -10,7 +10,7 @@ import { RequestService } from './request.service';
 export class LoginService {
     loginUrl = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod/LOGIN';
     registerUrl = 'https://trixd5mgs7.execute-api.us-east-1.amazonaws.com/prod/SIGNUP';
-    
+
     constructor(private requestService: RequestService) { }
 
     register(username: String, password: String, email: String, successCB: Function, failCB: Function): Promise<boolean> {
@@ -24,7 +24,7 @@ export class LoginService {
       return this.requestService.makePostRequest(content, successCB, failCB, this.registerUrl);
     }
 
-    confirm(username: String, code: String, successCB, failCB): Promise<boolean>{
+    confirm(username: String, code: String, successCB, failCB): Promise<boolean> {
       // Create signup body
       const content = JSON.stringify({
         USERNAME: username,
@@ -40,7 +40,7 @@ export class LoginService {
           USERNAME: username,
           PASSWORD: password
         });
-        // Make post request        
+        // Make post request
         return this.requestService.makePostRequest(content, successCB, failCB, this.loginUrl);
       }
 }

@@ -1,7 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
+import { ListModel } from './list.model';
+import { RequestService } from '../services/request.service';
 
-@Injectable()
+@NgModule({
+    imports: [],
+    providers: [RequestService]
+  })
 export class ListService {
+    constructor(private requestService: RequestService) { }
     lists = {};
     selectedList = '';
     requests = { // TODO: could be put into a configuration service, which reads json stored values
@@ -36,19 +42,37 @@ export class ListService {
      * @description Loads a list from the backend into the local storage.
      * @returns {Promise<any>}
      */
-    loadList (type): Promise<any> {
-        let list;
+    loadList (type): Promise<ListModel> {
+        let list: ListModel;
         // Do something
-        switch (type) {
-            case this.requests.USERS:
-                // Do something
-                list = [];
-            break;
-            default:
-                console.log('loadList function could not find list type ', type);
-                // Do something
-        }
-        return list;
+        // switch (type) {
+        //     case this.requests.USERS:
+        //     break;
+        //     case this.requests.LISTING:
+        //     break;
+        //     default:
+        //         console.log('loadList function could not find list type ', type);
+        // }
+        return new Promise((resolve, reject) => {
+            // Call backend with type
+            this.requestService.makeGetRequest(
+                {
+                    user_id: '',
+                    type_of_req: type,
+                    req_options: '',
+                    company: ''
+                },
+                (data) => {
+                    list = this._createListObject([], []);
+                    resolve(list);
+                },
+                (err) => {
+                    console.error(err);
+                    reject(err);
+                },
+                '/test-list.json'
+            );
+        });
     }
 
     /**
@@ -59,12 +83,13 @@ export class ListService {
      * @returns {Promise<any>}
      */
     getList (type): Promise<any> {
-        if (this.IsListPopulated(type)) {
-            return this.lists[type];
-        }
         return new Promise((resolve, reject) => {
-            const list = this.loadList(type);
-            resolve(list);
+            if (this.IsListPopulated(type)) {
+                resolve(this.lists[type]);
+            } else {
+                const list = this.loadList(type);
+                resolve(list);
+            }
           });
     }
 
@@ -81,5 +106,31 @@ export class ListService {
 
     getItem (itemID) {
         // Do something
+    }
+
+    // Internal functions
+
+    /**
+     * @function _createListObject
+     * @param data
+     * @param attrs
+     */
+    _createListObject (data: Array<any>, attrs: Array<any>): ListModel {
+        /**
+         * Explected
+         * {
+         *  data : [{id:string, * }]
+         * }
+         */
+        const list = new ListModel([], null, '');
+        for (const item of data) {
+            list.addListItem(
+                item.id,
+                item,
+                console.log,
+                item.id
+            );
+        }
+        return list;
     }
 }
