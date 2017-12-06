@@ -77,12 +77,15 @@ export class ListService {
 
     /**
      * @function getList
-     * @param type
+     * @param type RequestType
      * @description Gets a list already loaded,
      * else request list from the backend.
      * @returns {Promise<any>}
      */
-    getList (type): Promise<any> {
+    getList (type) {
+        if (type === 'dummy') {
+            return this._createListObject([1, 2, 3, 4, 5], [1, 2, 3, 4]).getRaw();
+        }
         return new Promise((resolve, reject) => {
             if (this.IsListPopulated(type)) {
                 resolve(this.lists[type]);

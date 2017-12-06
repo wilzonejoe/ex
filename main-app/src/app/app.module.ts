@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MaterializeModule } from 'angular2-materialize';
@@ -31,6 +32,7 @@ import { RoutesConfiguration } from './app.routes';
     MaterializeModule,
     RoutesConfiguration,
     ListModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

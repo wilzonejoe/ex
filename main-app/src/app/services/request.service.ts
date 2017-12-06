@@ -3,7 +3,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @NgModule({
-    imports: []
+    imports: [],
+    providers: [Http]
 })
 export class RequestService {
     // Field var

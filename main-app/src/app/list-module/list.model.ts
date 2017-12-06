@@ -51,4 +51,7 @@ export class ListModel {
         // Get all
         return this.listDataItem;
     }
+    getRaw() {
+        return JSON.parse(JSON.stringify(this.listDataItem));
+    }
 }
