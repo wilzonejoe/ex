@@ -8,7 +8,7 @@ export class ListModel {
     listDataItem: Array<ListDataItem>;
     onClickCB: Function;
     data;
-    constructor(@Inject(ListDataItem) listDataItem: Array<ListDataItem>, onClickCB: Function, data) {
+    constructor(listDataItem: Array<ListDataItem>, onClickCB: Function, data) {
         this.listDataItem = listDataItem;
         this.onClickCB = onClickCB;
         this.data = data;

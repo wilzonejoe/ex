@@ -16,7 +16,7 @@ import { RequestService } from '../services/request.service';
     BrowserModule,
     FormsModule
   ],
-  providers: [ListModel, ListDataItem, RequestService],
+  providers: [RequestService],
   bootstrap: [ListComponent]
 })
 export class ListModule { }
