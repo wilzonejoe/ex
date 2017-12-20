@@ -1,13 +1,13 @@
 import { Injectable, NgModule } from '@angular/core';
 import { ListModel } from './list.model';
-import { RequestService } from '../services/request.service';
+// import { RequestService } from '../services/request.service';
 
 @NgModule({
     imports: [],
-    providers: [RequestService]
+    providers: [/*RequestService*/]
   })
 export class ListService {
-    constructor(private requestService: RequestService) { }
+    constructor(/*private requestService: RequestService*/) { }
     lists = {};
     selectedList = '';
     requests = { // TODO: could be put into a configuration service, which reads json stored values
@@ -43,7 +43,7 @@ export class ListService {
      * @returns {Promise<any>}
      */
     loadList (type): Promise<ListModel> {
-        let list: ListModel;
+        // let list: ListModel;
         // Do something
         // switch (type) {
         //     case this.requests.USERS:
@@ -55,23 +55,23 @@ export class ListService {
         // }
         return new Promise((resolve, reject) => {
             // Call backend with type
-            this.requestService.makeGetRequest(
-                {
-                    user_id: '',
-                    type_of_req: type,
-                    req_options: '',
-                    company: ''
-                },
-                (data) => {
-                    list = this._createListObject([], []);
-                    resolve(list);
-                },
-                (err) => {
-                    console.error(err);
-                    reject(err);
-                },
-                '/test-list.json'
-            );
+            // this.requestService.makeGetRequest(
+            //     {
+            //         user_id: '',
+            //         type_of_req: type,
+            //         req_options: '',
+            //         company: ''
+            //     },
+            //     (data) => {
+            //         list = this._createListObject([], []);
+            //         resolve(list);
+            //     },
+            //     (err) => {
+            //         console.error(err);
+            //         reject(err);
+            //     },
+            //     '/test-list.json'
+            // );
         });
     }
 
