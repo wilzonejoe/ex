@@ -9,7 +9,6 @@ import * as jsonSchema from 'json-schema';
 // Shared fixture variables in tests
 let fixture;
 let app;
-let validate;
 
 // let listData;
 
@@ -23,41 +22,28 @@ describe('ListComponent', () => {
     // Setup test fixtures
     fixture = TestBed.createComponent(ListComponent);
     app = fixture.debugElement.componentInstance;
-    validate = jsonSchema.validate;
     // Test data structures
     // const attribute1 = new ListDataItem('attr1', 1, null, '1');
     // listData = new ListModel([attribute1], null, {data : 1});
   }));
 
   it('checking validate', async(() => {
-      const Person = {
-        firstName : 'dan',
-        // lastName : 'man'
-        age : 12312312323
+      const person = {
+        //  firstName : 'dan',
+        //  lastName : null
       };
-      const thingSchema = {
-        title: 'Person',
-        type: 'object',
-        required: ['firstName', 'lastName'],
-        properties: {
-            firstName: {
-                type: 'string',
-                // enum: ['dann']
-            },
-            lastName: {
-                type: 'string'
-            },
-            age: {
-                description: 'Age in years',
-                type: 'integer',
-                minimum: 0
-                // maximum: 2
-            }
-        }
+      // const person = 'string';
+      const personSchema = {
+          type: 'object',
+          properties: {
+              firstName: { type: 'string', required : true},
+              lastName: { type: 'string' , required : true},
+              age: { type: 'integer', required : true }
+          }
       };
-      const res = jsonSchema.validate(Person, thingSchema);
+      const res = jsonSchema.validate(person, personSchema);
       console.log(res);
-      expect(res.valid).toBeTruthy();
+      expect(res.valid).toBeFalsy();
   }));
 
   // it('should create the list', async(() => {
