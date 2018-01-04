@@ -1,0 +1,21 @@
+{
+    "title": "service",
+    "type" : "object",
+    "properties" : {
+        "id" : { "type" : "string" },
+        "idSelector" : { "type" : "string" },
+        "merchantName" : { "required" : true },
+        "merchantId" : { "required" : true },
+        "userId" : { "required" : true },
+        "userFullName" : { "required" : true },
+        "description" : { "required" : true },
+        "createdDate" : { "required" : true },
+        "venue" : { },
+        "tags" : { },
+        "socialMediaLinks" : { },
+        "phone" : { },
+        "email" : { },
+        "website" : { }, 
+        "data" : { "required" : true }
+    }
+}
