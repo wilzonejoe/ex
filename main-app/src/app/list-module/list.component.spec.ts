@@ -3,13 +3,19 @@ import { By } from '@angular/platform-browser';
 
 import { ListComponent } from './list.component';
 import { ListModel } from './list.model';
-import { ListDataItem } from './list-data-item.model';
+// import { ListDataItem } from './list-data-item.model';
+import * as jsonSchema from 'json-schema';
+
+// Models
+import * as baseModel from '../models/object.model.json';
+import * as userModel from '../models/user.model.json';
+import * as listingModel from '../models/listing.model.json';
 
 // Shared fixture variables in tests
 let fixture;
 let app;
 
-let listData;
+// let listData;
 
 describe('ListComponent', () => {
   beforeEach(async(() => {
@@ -22,25 +28,44 @@ describe('ListComponent', () => {
     fixture = TestBed.createComponent(ListComponent);
     app = fixture.debugElement.componentInstance;
     // Test data structures
-    const attribute1 = new ListDataItem('attr1', 1, null, '1');
-    listData = new ListModel([attribute1], null, {data : 1});
+    // const attribute1 = new ListDataItem('attr1', 1, null, '1');
+    // listData = new ListModel([attribute1], null, {data : 1});
   }));
 
-  it('should create the list', async(() => {
-    expect(fixture).toBeTruthy();
-    expect(app).toBeTruthy();
+  it('checking validate', async(() => {
+      const person = {
+        //  firstName : 'dan',
+        //  lastName : null
+      };
+      // const person = 'string';
+      const personSchema = {
+          type: 'object',
+          properties: {
+              firstName: { type: 'string', required : true},
+              lastName: { type: 'string' , required : true},
+              age: { type: 'integer', required : true }
+          }
+      };
+      const res = jsonSchema.validate(person, personSchema);
+      console.log(res);
+      expect(res.valid).toBeFalsy();
   }));
 
-  it('should be able to store a list object', async(() => {
-    app.init(listData);
-    expect(app.getList()).toBeTruthy();
-  }));
+  // it('should create the list', async(() => {
+  //   expect(fixture).toBeTruthy();
+  //   expect(app).toBeTruthy();
+  // }));
 
-  it('should be able display list object', async(() => {
-    app.init(listData);
-    // Display logic
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.innerHTML).toContain('attr1');
-  }));
+  // it('should be able to store a list object', async(() => {
+  //   app.init(listData);
+  //   expect(app.getList()).toBeTruthy();
+  // }));
+
+  // it('should be able display list object', async(() => {
+  //   app.init(listData);
+  //   // Display logic
+  //   fixture.detectChanges();
+  //   const compiled = fixture.debugElement.nativeElement;
+  //   expect(compiled.innerHTML).toContain('attr1');
+  // }));
 });

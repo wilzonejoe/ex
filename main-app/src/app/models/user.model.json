@@ -1,0 +1,11 @@
+{
+    "title": "user",
+    "type" : "object",
+    "properties" : {
+        "username" : { "required" : true },
+        "email" : { "required" : true },
+        "firstName" : {"required" : true },
+        "lastName" : { "required" : true },
+        "phoneNumber" : { "type" : "string" }
+    }
+}

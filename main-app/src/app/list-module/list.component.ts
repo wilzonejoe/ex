@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListModel } from './list.model';
+// import { ListModel } from './list.model';
 import { ListDataItem } from './list-data-item.model';
 import { ListService } from './list.service';
 
@@ -23,9 +23,9 @@ export class ListComponent implements OnInit {
         console.log(this.list);
     }
 
-    init(list: ListModel) {
-        this.list = list;
-    }
+    // init(list: ListModel) {
+    //     this.list = list;
+    // }
 
     getList(): Array<ListDataItem> {
         return this.list.getListItems() == null ? null : this.list.getListItems();
