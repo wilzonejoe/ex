@@ -5,3 +5,7 @@ interface NodeModule {
 }
 declare var validate: any;
 declare var jsonSchema: any;
+declare module "*.json" {
+  const value: any;
+  export default value;
+}
