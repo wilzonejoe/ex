@@ -1,5 +1,5 @@
 import { Injectable, NgModule } from '@angular/core';
-import { ListModel } from './list.model';
+// import { ListModel } from './list.model';
 // import { RequestService } from '../services/request.service';
 
 @NgModule({
@@ -40,9 +40,8 @@ export class ListService {
      * @function loadList
      * @param type
      * @description Loads a list from the backend into the local storage.
-     * @returns {Promise<any>}
      */
-    loadList (type): Promise<ListModel> {
+    loadList (type) {
         // let list: ListModel;
         // Do something
         // switch (type) {
@@ -84,7 +83,7 @@ export class ListService {
      */
     getList (type) {
         if (type === 'dummy') {
-            return this._createListObject([1, 2, 3, 4, 5], [1, 2, 3, 4]).getRaw();
+            return this._createListObject([1, 2, 3, 4, 5], [1, 2, 3, 4]);
         }
         return new Promise((resolve, reject) => {
             if (this.IsListPopulated(type)) {
@@ -118,22 +117,40 @@ export class ListService {
      * @param data
      * @param attrs
      */
-    _createListObject (data: Array<any>, attrs: Array<any>): ListModel {
+    _createListObject (data: Array<any>, attrs: Array<any>) {
         /**
          * Explected
          * {
          *  data : [{id:string, * }]
          * }
          */
-        const list = new ListModel([], null, '');
-        for (const item of data) {
-            list.addListItem(
-                item.id,
-                item,
-                console.log,
-                item.id
-            );
-        }
+        const testListing = {
+            id : 1,
+            idSelector : '1',
+            merchantName : 'MerchantAbc',
+            merchantId : 'asdnasdas213123',
+            userId : 'testUser',
+            userFullName : 'john deer',
+            description : 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.',
+            createdDate : '10/12/13',
+            venue : '33 Flat st, Flatbushtown, Aokland',
+            tags : ['deer', 'deeeer1', 'cow2'],
+            socialMediaLinks : '',
+            phone : '123456679812',
+            email : 'mail@mail.com',
+            website : 'www.examplecompanywebsite.com',
+            data : {}
+        };
+        const list = [testListing, testListing, testListing];
+        // const list = new ListModel([], null, '');
+        // for (const item of data) {
+        //     list.addListItem(
+        //         item.id,
+        //         item,
+        //         console.log,
+        //         item.id
+        //     );
+        // }
         return list;
     }
 }

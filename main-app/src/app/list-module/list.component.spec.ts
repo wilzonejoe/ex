@@ -7,7 +7,9 @@ import { ListModel } from './list.model';
 import * as jsonSchema from 'json-schema';
 
 // Models
-import * as baseModelObject from '../models/object.model.json';
+import * as baseModel from '../models/object.model.json';
+import * as userModel from '../models/user.model.json';
+import * as listingModel from '../models/listing.model.json';
 
 // Shared fixture variables in tests
 let fixture;
