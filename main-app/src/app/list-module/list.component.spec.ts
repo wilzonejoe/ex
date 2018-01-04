@@ -9,7 +9,6 @@ import * as jsonSchema from 'json-schema';
 // Models
 import * as baseModelObject from '../models/object.model.json';
 
-
 // Shared fixture variables in tests
 let fixture;
 let app;
