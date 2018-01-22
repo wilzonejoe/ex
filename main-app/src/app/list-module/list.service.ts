@@ -127,7 +127,8 @@ export class ListService {
         const testListing = {
             id : 1,
             idSelector : '1',
-            merchantName : 'MerchantAbc',
+            imgSrc: 'http://random.cat/i/S3oFb.jpg',
+            merchantName : 'CatMerchantAbc',
             merchantId : 'asdnasdas213123',
             userId : 'testUser',
             userFullName : 'john deer',
@@ -141,7 +142,15 @@ export class ListService {
             website : 'www.examplecompanywebsite.com',
             data : {}
         };
-        const list = [testListing, testListing, testListing];
+        const testListing1 = testListing;
+        let testListing2 = testListing;
+        let testListing3 = testListing;
+        
+        testListing1.imgSrc = 'http://random.cat/i/ojfUqsw.jpg';
+        testListing2.imgSrc = 'http://random.cat/i/blackmo.jpg';
+        testListing3.imgSrc = 'http://random.cat/i/eEcqu.jpg';
+        
+        const list = [testListing1, testListing2, testListing3];
         // const list = new ListModel([], null, '');
         // for (const item of data) {
         //     list.addListItem(

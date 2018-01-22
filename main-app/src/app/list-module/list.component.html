@@ -1,17 +1,33 @@
 <div>
     <div *ngFor="let item of list">
-        <p>{{item.id}}</p> 
-        <p>{{item.idSelector}}</p> 
-        <p>{{item.merchantName}}</p>
-        <p>{{item.merchantId}}</p>
-        <p>{{item.userFullName}}</p>
-        <p>{{item.description}}</p>
-        <p>{{item.createdDate}}</p>
-        <p>{{item.venue}}</p>
-        <p>{{item.tags}}</p>
-        <p>{{item.phone}}</p>
-        <p>{{item.email}}</p>
-        <p>{{item.website}}</p>
-        <hr>
+        <div class="row">
+            <div class="col s2"></div>
+            <div class="card col s8">
+                <div class="col s12">
+                    <!-- <p>{{item.id}}</p>  -->
+                    <!-- <p>{{item.idSelector}}</p> -->
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <span class="card-title activator"> {{item.merchantName}} <i class="material-icons right">more_vert</i> </span>
+                        <img class="responsive-img circle materialboxed activator" src="{{item.imgSrc}}"><img> 
+                        <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>                                                  -->
+                    </div>
+                    <!-- <p>{{item.merchantId}}</p> -->
+                    <!-- <p>{{item.userFullName}}</p> -->
+                    <div class="card-content">
+                        <p>{{item.description}}</p>
+                        <p>{{item.createdDate}}</p>
+                        <p>{{item.venue}}</p>
+                        <p>{{item.tags}}</p>
+                        <p>{{item.phone}}</p>
+                        <p>{{item.email}}</p>
+                        <p>{{item.website}}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">More Details</a> <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s2"></div>            
+        </div>
     </div>
 </div>
